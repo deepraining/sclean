@@ -1,0 +1,82 @@
+{
+  "name": "sclean",
+  "version": "0.0.1",
+  "main": "index.js",
+  "bin": "bin/sclean.js",
+  "description": "A tool to clean obsolete files with hash-code file names, created by building tools, such as webpack, gulp, etc(for server side).",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/senntyou/sclean"
+  },
+  "keywords": [
+    "web",
+    "frontend",
+    "build",
+    "tool",
+    "gulp",
+    "webpack",
+    "clean",
+    "obsolete",
+    "redundant"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/senntyou/sclean/issues"
+  },
+  "homepage": "https://github.com/senntyou/sclean",
+  "readmeFilename": "README.md",
+  "scripts": {
+    "// precommit": "npm run lint-staged",
+    "prettier": "prettier --write ./**/*.{js,json,md}",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint . --fix",
+    "lint-staged": "lint-staged",
+    "test": "jest",
+    "cover": "npm run cover:init && npm run cover:all && npm run cover:report",
+    "cover:init": "rimraf coverage",
+    "cover:all": "jest --coverage",
+    "cover:report": "istanbul report"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "crypto-md5": "^1.0.0",
+    "decompress": "^4.2.0",
+    "del": "^3.0.0",
+    "fs-extra": "^6.0.1",
+    "glob": "^7.1.2",
+    "gulp": "^4.0.0",
+    "gulp-cli": "git://github.com/senntyou/gulp-cli.git#6f9e0ef",
+    "gulp-rename": "1.2.2",
+    "gulp-zip": "^4.1.0",
+    "lodash": "^4.17.10",
+    "minimist": "^1.2.0",
+    "moment": "^2.22.2",
+    "plugin-error": "^1.0.1",
+    "rd": "^1.1.2",
+    "through2": "^2.0.3",
+    "yargs": "^8.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-jest": "^21.17.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "husky": "^0.14.3",
+    "istanbul": "^0.4.5",
+    "jest": "^23.4.0",
+    "lint-staged": "^7.2.0",
+    "prettier": "^1.13.7",
+    "rimraf": "^2.6.2"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
