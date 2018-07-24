@@ -6,13 +6,14 @@ const logger = require('../util/logger');
 const sequenceSuffix = require('../util/sequence_suffix');
 const revertShare = require('../share/revert');
 const registerTasks = require('../tasks/register');
+const projectConfig = require('../project_config');
 
 /**
  * Find all existing packages, from old to new.
  *
  * @type {*|{define}}
  */
-revertShare.packages = glob.sync('dist-*.zip');
+revertShare.packages = glob.sync(`${projectConfig.target}-*.zip`);
 
 if (!revertShare.packages || !revertShare.packages.length) {
   logger.error(`
@@ -39,7 +40,7 @@ registerTasks(gulp);
 // Execute task.
 gulp.series('revert', cb => {
   logger.success(`
-  Revert 'dist' directory to last ${revertShare.index}${sequenceSuffix(revertShare.index)} archive state successfully, 
+  Revert '${projectConfig.target}' directory to last ${revertShare.index}${sequenceSuffix(revertShare.index)} archive state successfully, 
   with filename of '${revertShare.revertZip}'.
   `);
 

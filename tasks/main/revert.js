@@ -3,6 +3,7 @@ const decompress = require('decompress');
 
 const pathInfo = require('../../data/path_info');
 const revertShare = require('../../share/revert');
+const projectConfig = require('../../project_config');
 
 /**
  * Register `revert` task.
@@ -10,10 +11,10 @@ const revertShare = require('../../share/revert');
  */
 module.exports = gulp => {
   gulp.task('revert', cb => {
-    const distPath = `${pathInfo.projectRoot}/dist`;
+    const targetPath = `${pathInfo.projectRoot}/${projectConfig.target}`;
 
-    // Remove old `dist` directory.
-    fse.removeSync(distPath);
+    // Remove old `target` directory.
+    fse.removeSync(targetPath);
 
     /**
      * Zip file name.
@@ -22,7 +23,7 @@ module.exports = gulp => {
      */
     revertShare.revertZip = revertShare.packages[revertShare.packages.length - revertShare.index];
 
-    decompress(`${pathInfo.projectRoot}/${revertShare.revertZip}`, distPath).then(() => {
+    decompress(`${pathInfo.projectRoot}/${revertShare.revertZip}`, targetPath).then(() => {
       cb();
     });
   });
