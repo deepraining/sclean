@@ -1,4 +1,4 @@
 
 require('../../util/change_cwd')(__dirname + '/demo');
 
-require('../../util/exec')('sclean add test/index');
+require('../../util/exec')('sclean init');
