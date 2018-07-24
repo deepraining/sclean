@@ -35,7 +35,7 @@ const defaultValue = {
    * @returns {RegExp}
    */
   matchFileName: () => {
-    return /^([0-9a-f]{32})\./g;
+    return /^([0-9a-f]{32})\.(js|css)$/g;
   },
   /**
    * Match `js` file name.
@@ -75,11 +75,10 @@ const defaultValue = {
    * prefix/123.32-hash.js
    * ```
    *
-   * @param hashLength
    * @returns {RegExp}
    */
-  matchJsChunkFileName: hashLength => {
-    return /\/[0-9]+\.[0-9a-f]{32}\.js$/i;
+  matchJsChunkFileName: () => {
+    return /^[0-9]+\.([0-9a-f]{32})\.js$/i;
   },
 };
 

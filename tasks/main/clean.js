@@ -79,23 +79,23 @@ module.exports = gulp => {
   const cleanChunks = cb => {
     // All hash codes.
     const hashCodes = uniq(extractChunkHashCodes());
-    const testRegExp = projectConfig.matchJsChunkFileName();
     let deletedFilesCount = 0;
 
     rd.eachFileFilterSync(`${pathInfo.projectRoot}/${projectConfig.target}`, file => {
       // File path.
       const filePath = pathUtil.replaceBackSlash(file);
-      if (!testRegExp.test(filePath)) {
-        return;
-      }
 
       const lastSlashIndex = filePath.lastIndexOf('/');
       const fileName = lastSlashIndex === -1 ? filePath : filePath.slice(lastSlashIndex + 1);
 
-      const hash = fileName.split('.')[1];
+      const regExp = projectConfig.matchJsChunkFileName();
+      const result = regExp.exec(fileName);
+      if (!result) {
+        return;
+      }
 
       // not in use, remove it
-      if (hashCodes.indexOf(hash) < 0) {
+      if (hashCodes.indexOf(result[1]) < 0) {
         fse.removeSync(file);
         deletedFilesCount < 1 && logger.info('');
         logger.info(`Deleted js chunk file: ${file}`);
