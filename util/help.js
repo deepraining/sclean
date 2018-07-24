@@ -1,3 +1,5 @@
+const chalk = require('chalk');
+
 const packageJson = require('../package.json');
 
 const version = packageJson.version;
@@ -8,8 +10,12 @@ const options = {};
 // all commands
 const commands = [
   {
+    name: 'init',
+    desc: 'Init current directory for clean.',
+  },
+  {
     name: 'archive',
-    desc: 'Archive dist directory on server side.',
+    desc: 'Archive target directory.',
   },
   {
     name: 'arc',
@@ -17,11 +23,11 @@ const commands = [
   },
   {
     name: 'clean',
-    desc: "Clean redundant files caused by revision(filename by each file's hash code).",
+    desc: `${chalk.blue('[Default command]')} Clean redundant files caused by revision(filename by each file's hash code).`,
   },
   {
     name: 'revert',
-    desc: 'Revert dist directory to last archive state.',
+    desc: 'Revert target directory to last archive state.',
   },
 ];
 
