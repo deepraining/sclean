@@ -4,10 +4,11 @@ const gulp = require('gulp');
 const pathInfo = require('../data/path_info');
 const logger = require('../util/logger');
 const registerTasks = require('../tasks/register');
+const projectConfig = require('../project_config');
 
-if (!fs.existsSync(`${pathInfo.projectRoot}/dist`)) {
+if (!fs.existsSync(`${pathInfo.projectRoot}/${projectConfig.target}`)) {
   logger.error(`
-  Missing 'dist' directory for command: clean.
+  Missing '${projectConfig.target}' directory for command: clean.
   `);
   process.exit(1);
 }
@@ -18,7 +19,7 @@ registerTasks(gulp);
 // Execute task.
 gulp.series('clean', cb => {
   logger.success(`
-  Clean 'dist' directory successfully.
+  Clean '${projectConfig.target}' directory successfully.
   `);
 
   cb();

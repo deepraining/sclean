@@ -4,10 +4,9 @@ const rd = require('rd');
 
 const pathUtil = require('../../util/path');
 const logger = require('../../util/logger');
-const share = require('../../share');
 const pathInfo = require('../../data/path_info');
+const projectConfig = require('../../project_config');
 
-const makeRegExp = require('../clean/reg_exp');
 const extractHashCodes = require('../clean/hash_codes');
 const extractChunkHashCodes = require('../clean/chunk_hash_codes');
 
@@ -23,7 +22,7 @@ module.exports = gulp => {
     const hashCodes = uniq(extractHashCodes());
     let deletedFilesCount = 0;
 
-    rd.eachFileFilterSync(`${pathInfo.projectRoot}/dist`, file => {
+    rd.eachFileFilterSync(`${pathInfo.projectRoot}/${projectConfig.target}`, file => {
       // Only clean js and css files.
       if (file.slice(-3) !== '.js' && file.slice(-4) !== '.css') {
         return;
@@ -44,7 +43,7 @@ module.exports = gulp => {
       const fileName = lastSlashIndex === -1 ? filePath : filePath.slice(lastSlashIndex + 1);
 
       // Match `js|css` file.
-      const regExp = makeRegExp.matchFileName(share.hashDigestLength);
+      const regExp = projectConfig.matchFileName();
       const result = regExp.exec(fileName);
       if (!result) {
         return;
@@ -80,10 +79,10 @@ module.exports = gulp => {
   const cleanChunks = cb => {
     // All hash codes.
     const hashCodes = uniq(extractChunkHashCodes());
-    const testRegExp = makeRegExp.matchJsChunkFileName(share.hashDigestLength);
+    const testRegExp = projectConfig.matchJsChunkFileName();
     let deletedFilesCount = 0;
 
-    rd.eachFileFilterSync(`${pathInfo.projectRoot}/dist`, file => {
+    rd.eachFileFilterSync(`${pathInfo.projectRoot}/${projectConfig.target}`, file => {
       // File path.
       const filePath = pathUtil.replaceBackSlash(file);
       if (!testRegExp.test(filePath)) {

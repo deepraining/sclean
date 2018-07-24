@@ -2,8 +2,7 @@ const fs = require('fs');
 const rd = require('rd');
 
 const pathInfo = require('../../data/path_info');
-const share = require('../../share');
-const makeRegExp = require('./reg_exp');
+const projectConfig = require('../../project_config');
 
 /**
  * Extract `js/css` hash codes from all html files.
@@ -13,20 +12,21 @@ const makeRegExp = require('./reg_exp');
 module.exports = () => {
   const hashCodes = [];
 
-  const htmlDirectory = `${pathInfo.projectRoot}/dist/html`;
+  const targetDir = `${pathInfo.projectRoot}/${projectConfig.target}`;
 
   // Find all files and extract hash codes.
-  fs.existsSync(htmlDirectory) &&
-    rd.eachFileFilterSync(htmlDirectory, file => {
-      // File content.
-      const content = fs.readFileSync(file);
+  rd.eachFileFilterSync(targetDir, file => {
+    if (file.slice(0 - projectConfig.htmlExtension.length) !== projectConfig.htmlExtension) return;
 
-      const regExp = makeRegExp.extractFromHtml(share.hashDigestLength);
-      let result;
-      while ((result = regExp.exec(content))) {
-        hashCodes.push(result[1]);
-      }
-    });
+    // File content.
+    const content = fs.readFileSync(file);
+
+    const regExp = projectConfig.extractFromHtml();
+    let result;
+    while ((result = regExp.exec(content))) {
+      hashCodes.push(result[1]);
+    }
+  });
 
   return hashCodes;
 };
