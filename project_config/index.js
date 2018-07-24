@@ -1,13 +1,14 @@
-const cloneDeep = require('lodash/cloneDeep');
+const fs = require('fs');
 
-const origin = require('./origin');
-const format = require('./format');
+const pathInfo = require('../data/path_info');
 
-const config = format(cloneDeep(origin));
+const config = fs.existsSync(pathInfo.configFilePath) ? require(pathInfo.configFilePath) : {};
+
+require('./fill')(config);
 
 /**
  *
- * Indexing project config.
+ * Project config.
  *
  */
 module.exports = config;

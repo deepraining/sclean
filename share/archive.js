@@ -1,4 +1,5 @@
 const logger = require('../util/logger');
+const projectConfig = require('../project_config');
 
 const share = {
   // File name of zip.
@@ -8,7 +9,7 @@ const share = {
 // End handler after archive.
 share.endHandler = cb => {
   logger.success(`
-  Pack 'dist' directory successfully!
+  Pack '${projectConfig.target}' directory successfully!
   
   You can find it '${share.zipFileName}' in current directory.
   `);
