@@ -9,6 +9,7 @@ const projectConfig = require('../../project_config');
 
 const extractHashCodes = require('../clean/hash_codes');
 const extractChunkHashCodes = require('../clean/chunk_hash_codes');
+const makeRegExp = require('../clean/reg_exp');
 
 /**
  * Register `clean` task.
@@ -42,12 +43,13 @@ module.exports = gulp => {
       const lastSlashIndex = filePath.lastIndexOf('/');
       const fileName = lastSlashIndex === -1 ? filePath : filePath.slice(lastSlashIndex + 1);
 
+      // Is js chunk file, not handle.
+      if (projectConfig.testChunkFile.test(fileName)) return;
+
       // Match `js|css` file.
-      const regExp = projectConfig.matchFileName();
-      const result = regExp.exec(fileName);
-      if (!result) {
-        return;
-      }
+      const regExp = makeRegExp(projectConfig.hashLength);
+      const result = regExp.exec(filePath);
+      if (!result) return;
 
       // Not in use, remove it.
       if (hashCodes.indexOf(result[1]) < 0) {
@@ -59,7 +61,7 @@ module.exports = gulp => {
     });
 
     logger.success(`
-  ${deletedFilesCount} redundant files are deleted successfully.    
+  ${deletedFilesCount} obsolete files are deleted successfully.    
     `);
 
     cb();
@@ -82,14 +84,22 @@ module.exports = gulp => {
     let deletedFilesCount = 0;
 
     rd.eachFileFilterSync(`${pathInfo.projectRoot}/${projectConfig.target}`, file => {
+      // Only clean js files.
+      if (file.slice(-3) !== '.js') {
+        return;
+      }
+
       // File path.
       const filePath = pathUtil.replaceBackSlash(file);
 
       const lastSlashIndex = filePath.lastIndexOf('/');
       const fileName = lastSlashIndex === -1 ? filePath : filePath.slice(lastSlashIndex + 1);
 
-      const regExp = projectConfig.matchJsChunkFileName();
-      const result = regExp.exec(fileName);
+      // Not js chunk file, not handle.
+      if (!projectConfig.testChunkFile.test(fileName)) return;
+
+      const regExp = makeRegExp(projectConfig.hashLength);
+      const result = regExp.exec(filePath);
       if (!result) {
         return;
       }
@@ -104,7 +114,7 @@ module.exports = gulp => {
     });
 
     logger.success(`
-  ${deletedFilesCount} redundant js chunk files are deleted successfully.
+  ${deletedFilesCount} obsolete js chunk files are deleted successfully.
     `);
 
     cb();

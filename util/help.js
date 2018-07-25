@@ -23,7 +23,7 @@ const commands = [
   },
   {
     name: 'clean',
-    desc: `${chalk.blue('[Default command]')} Clean redundant files caused by revision(filename by each file's hash code).`,
+    desc: `${chalk.blue('[Default command]')} Clean obsolete files caused by revision(filename by each file's hash code).`,
   },
   {
     name: 'revert',

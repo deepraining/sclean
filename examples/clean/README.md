@@ -15,5 +15,5 @@
 
 * `other.89abcdef.js`
 * `inner/inner.12345678.css`
-* `229.d4025f09.async.js`
-* `9.3c7c4210.async.js`
+* `async.229.d4025f09.js`
+* `async.9.3c7c4210.js`

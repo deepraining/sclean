@@ -7,79 +7,10 @@ const defaultValue = {
   target: 'dist',
   // Html extension, such as `html`, `jsp`, `php`, default is `html`.
   htmlExtension: 'html',
-  /**
-   * Match `js/css` files in html.
-   *
-   * @example
-   *
-   * ```
-   * prefix/32-hash.js
-   * prefix/32-hash.css
-   * ```
-   *
-   * @returns {RegExp}
-   */
-  extractFromHtml: () => {
-    return /\/([0-9a-f]{32})\./g;
-  },
-  /**
-   * Match `js/css` file name.
-   *
-   * @example
-   *
-   * ```
-   * 32-hash.js
-   * 32-hash.css
-   * ```
-   *
-   * @returns {RegExp}
-   */
-  matchFileName: () => {
-    return /^([0-9a-f]{32})\.(js|css)$/g;
-  },
-  /**
-   * Match `js` file name.
-   *
-   * @example
-   *
-   * ```
-   * prefix/32-hash.js
-   *
-   * ```
-   *
-   * @returns {RegExp}
-   */
-  matchJsFileName: () => {
-    return /\/[0-9a-f]{32}\.js$/i;
-  },
-  /**
-   * Match js chunk file name.
-   *
-   * @example
-   *
-   * ```
-   * {"0":"7b7c4210539c2c41354207f419ec0249","1":"721ea8e8a5ae693fd7ed70b501c7d28c","2":"e2025f09faac9dd460cbac6913cfbda6"}
-   * ```
-   *
-   * @returns {RegExp}
-   */
-  extractFromJs: () => {
-    return /["']([0-9a-f]{32})["']/g;
-  },
-  /**
-   * Match chunk js file name.
-   *
-   * @example
-   *
-   * ```
-   * prefix/123.32-hash.js
-   * ```
-   *
-   * @returns {RegExp}
-   */
-  matchJsChunkFileName: () => {
-    return /^[0-9]+\.([0-9a-f]{32})\.js$/i;
-  },
+  // Hash code length.
+  hashLength: 32,
+  // Test a file is a chunk js file or not. See [Dynamic Imports](https://webpack.js.org/guides/code-splitting/#dynamic-imports).
+  testChunkFile: /^[0-9]{1,4}\./,
 };
 
 /**
