@@ -39,21 +39,15 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "crypto-md5": "^1.0.0",
     "decompress": "^4.2.0",
-    "del": "^3.0.0",
     "fs-extra": "^6.0.1",
     "glob": "^7.1.2",
     "gulp": "^4.0.0",
-    "gulp-cli": "git://github.com/senntyou/gulp-cli.git#6f9e0ef",
-    "gulp-rename": "1.2.2",
     "gulp-zip": "^4.1.0",
     "lodash": "^4.17.10",
     "minimist": "^1.2.0",
     "moment": "^2.22.2",
-    "plugin-error": "^1.0.1",
     "rd": "^1.1.2",
-    "through2": "^2.0.3",
     "yargs": "^8.0.2"
   },
   "devDependencies": {
