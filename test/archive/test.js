@@ -3,8 +3,9 @@ const { spawn } = require('child_process');
 const fs = require('fs');
 const fse = require('fs-extra');
 
-const script1 = path.join(__dirname, 'archive.js');
-const script2 = path.join(__dirname, 'arc.js');
+const filesCount = require('../../util/files_count');
+
+const script = path.join(__dirname, 'archive.js');
 const demoDir = path.join(__dirname, 'demo');
 
 describe('archive command', () => {
@@ -51,7 +52,7 @@ describe('archive command', () => {
   });
 
   test('archive', done => {
-    const child = spawn('node', [script1]);
+    const child = spawn('node', [script]);
 
     // Last message
     let stdoutMessage;
@@ -66,36 +67,8 @@ describe('archive command', () => {
       expect(stdoutMessage).not.toBeUndefined();
       // Has stdout
       expect(stdoutMessage).toContain("Pack 'dist' directory successfully!");
-      done();
-    });
-  });
-
-  test('arc', done => {
-    const child = spawn('node', [script2]);
-
-    // Last message
-    let stdoutMessage;
-
-    child.stdout.on('data', data => {
-      stdoutMessage = data.toString();
-    });
-
-    child.on('close', code => {
-      expect(code).toBe(0);
-      // Has stdout
-      expect(stdoutMessage).not.toBeUndefined();
-      // Has stdout
-      expect(stdoutMessage).toContain("Pack 'dist' directory successfully!");
-
-      let zipFilesCount = 0;
-      fs.readdirSync(demoDir).filter(file => {
-        if (file.slice(-4) === '.zip') {
-          zipFilesCount += 1;
-        }
-      });
-
-      expect(zipFilesCount).toBe(2);
-
+      // 1 files
+      expect(filesCount(demoDir, '.zip')).toBe(1);
       done();
     });
   });
