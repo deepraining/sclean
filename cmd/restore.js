@@ -1,11 +1,10 @@
 const glob = require('glob');
-const gulp = require('gulp');
 
 const argv = require('../data/argv');
+const pathInfo = require('../data/path_info');
 const logger = require('../util/logger');
 const sequenceSuffix = require('../util/sequence_suffix');
 const share = require('../share/restore');
-const registerTasks = require('../tasks/register');
 const projectConfig = require('../project_config');
 
 /**
@@ -34,17 +33,19 @@ if (index > share.packages.length) {
 
 share.index = index || 1;
 
-// Register gulp tasks.
-registerTasks(gulp);
+const processArgv = process.argv;
+// Modify `process.argv` for `gulp-cli`.
+process.argv = [processArgv[0], processArgv[1], 'restore', '--gulpfile', pathInfo.gulpFile];
 
-// Execute task.
-gulp.series('restore', cb => {
-  logger.success(`
+require('gulp-cli')(err => {
+  if (err) {
+    logger.error(err.stack || err);
+  } else {
+    logger.success(`
   Restore '${projectConfig.target}' directory to last ${share.index}${sequenceSuffix(
-    share.index
-  )} archive state successfully, 
+      share.index
+    )} archive state successfully, 
   with filename of '${share.restoreZip}'.
-  `);
-
-  cb();
-})();
+    `);
+  }
+});

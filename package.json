@@ -43,6 +43,7 @@
     "fs-extra": "^6.0.1",
     "glob": "^7.1.2",
     "gulp": "^4.0.0",
+    "gulp-cli": "git://github.com/senntyou/gulp-cli.git#6f9e0ef",
     "gulp-zip": "^4.1.0",
     "lodash": "^4.17.10",
     "minimist": "^1.2.0",

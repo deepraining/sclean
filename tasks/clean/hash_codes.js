@@ -2,7 +2,6 @@ const fs = require('fs');
 const rd = require('rd');
 
 const pathInfo = require('../../data/path_info');
-const logger = require('../../util/logger');
 const projectConfig = require('../../project_config');
 
 const makeRegExp = require('../clean/reg_exp');
@@ -36,11 +35,7 @@ module.exports = () => {
   });
 
   if (!htmlFileCount) {
-    logger.error(`
-  Found 0 '${projectConfig.htmlExtension}' files in '${projectConfig.target}' directory.
-    `);
-
-    process.exit(1);
+    throw new Error(`Found 0 '${projectConfig.htmlExtension}' files in '${projectConfig.target}' directory.`);
   }
 
   return hashCodes;

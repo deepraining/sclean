@@ -1,10 +1,8 @@
 const fs = require('fs');
-const gulp = require('gulp');
 
 const pathInfo = require('../data/path_info');
 const share = require('../share/archive');
 const logger = require('../util/logger');
-const registerTasks = require('../tasks/register');
 const projectConfig = require('../project_config');
 
 if (!fs.existsSync(`${pathInfo.projectRoot}/${projectConfig.target}`)) {
@@ -14,16 +12,18 @@ if (!fs.existsSync(`${pathInfo.projectRoot}/${projectConfig.target}`)) {
   process.exit(1);
 }
 
-// Register gulp tasks.
-registerTasks(gulp);
+const processArgv = process.argv;
+// Modify `process.argv` for `gulp-cli`.
+process.argv = [processArgv[0], processArgv[1], 'archive', '--gulpfile', pathInfo.gulpFile];
 
-// Execute task.
-gulp.series('archive', cb => {
-  logger.success(`
+require('gulp-cli')(err => {
+  if (err) {
+    logger.error(err.stack || err);
+  } else {
+    logger.success(`
   Pack '${projectConfig.target}' directory successfully!
   
   You can find it '${share.zipFileName}' in current directory.
-  `);
-
-  cb();
-})();
+    `);
+  }
+});
