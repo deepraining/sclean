@@ -1,4 +1,4 @@
 
 require('../../util/change_cwd')(__dirname + '/demo');
 
-require('../../util/exec')('sclean revert -i 2');
+require('../../util/exec')('sclean restore --index 3');

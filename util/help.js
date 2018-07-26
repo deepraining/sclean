@@ -23,11 +23,13 @@ const commands = [
   },
   {
     name: 'clean',
-    desc: `${chalk.blue('[Default command]')} Clean obsolete files caused by revision(filename by each file's hash code).`,
+    desc: `${chalk.blue(
+      '[Default command]'
+    )} Clean obsolete files caused by revision(filename by each file's hash code).`,
   },
   {
-    name: 'revert',
-    desc: 'Revert target directory to last archive state.',
+    name: 'restore',
+    desc: 'Restore target directory to last nth archive state.',
   },
 ];
 

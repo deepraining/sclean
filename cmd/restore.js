@@ -4,7 +4,7 @@ const gulp = require('gulp');
 const argv = require('../data/argv');
 const logger = require('../util/logger');
 const sequenceSuffix = require('../util/sequence_suffix');
-const revertShare = require('../share/revert');
+const share = require('../share/restore');
 const registerTasks = require('../tasks/register');
 const projectConfig = require('../project_config');
 
@@ -13,9 +13,9 @@ const projectConfig = require('../project_config');
  *
  * @type {*|{define}}
  */
-revertShare.packages = glob.sync(`${projectConfig.target}-*.zip`);
+share.packages = glob.sync(`${projectConfig.target}-*.zip`);
 
-if (!revertShare.packages || !revertShare.packages.length) {
+if (!share.packages || !share.packages.length) {
   logger.error(`
   No archive packages in current directory.
   `);
@@ -25,23 +25,25 @@ if (!revertShare.packages || !revertShare.packages.length) {
 const index = parseInt(argv.i, 10) || parseInt(argv.index, 10) || 0;
 
 // Index is greater than total length.
-if (index > revertShare.packages.length) {
+if (index > share.packages.length) {
   logger.error(`
-  Index "${index}" is greater than packages' length "${revertShare.packages.length}".
+  Index "${index}" is greater than packages' length "${share.packages.length}".
   `);
   process.exit(1);
 }
 
-revertShare.index = index || 1;
+share.index = index || 1;
 
 // Register gulp tasks.
 registerTasks(gulp);
 
 // Execute task.
-gulp.series('revert', cb => {
+gulp.series('restore', cb => {
   logger.success(`
-  Revert '${projectConfig.target}' directory to last ${revertShare.index}${sequenceSuffix(revertShare.index)} archive state successfully, 
-  with filename of '${revertShare.revertZip}'.
+  Restore '${projectConfig.target}' directory to last ${share.index}${sequenceSuffix(
+    share.index
+  )} archive state successfully, 
+  with filename of '${share.restoreZip}'.
   `);
 
   cb();

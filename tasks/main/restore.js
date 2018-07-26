@@ -2,15 +2,15 @@ const fse = require('fs-extra');
 const decompress = require('decompress');
 
 const pathInfo = require('../../data/path_info');
-const revertShare = require('../../share/revert');
+const share = require('../../share/restore');
 const projectConfig = require('../../project_config');
 
 /**
- * Register `revert` task.
+ * Register `restore` task.
  * @param gulp
  */
 module.exports = gulp => {
-  gulp.task('revert', cb => {
+  gulp.task('restore', cb => {
     const targetPath = `${pathInfo.projectRoot}/${projectConfig.target}`;
 
     // Remove old `target` directory.
@@ -21,9 +21,9 @@ module.exports = gulp => {
      *
      * Default sequence is from old to new, but actually want the reverse, from new to old.
      */
-    revertShare.revertZip = revertShare.packages[revertShare.packages.length - revertShare.index];
+    share.restoreZip = share.packages[share.packages.length - share.index];
 
-    decompress(`${pathInfo.projectRoot}/${revertShare.revertZip}`, targetPath).then(() => {
+    decompress(`${pathInfo.projectRoot}/${share.restoreZip}`, targetPath).then(() => {
       cb();
     });
   });

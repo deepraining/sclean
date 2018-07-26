@@ -6,12 +6,12 @@ module.exports = {
    */
   packages: [],
   /**
-   * Which package to revert.
+   * Which package to restore.
    *
    * @type {int} Use this to confirm package(from old to new).
    * @default 1 Index is started by 1.
    */
   index: 1,
-  // Zip file name to revert.
-  revertZip: '',
+  // Zip file name to restore.
+  restoreZip: '',
 };
