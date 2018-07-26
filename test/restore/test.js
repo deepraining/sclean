@@ -10,7 +10,7 @@ const script2 = path.join(__dirname, '2.js');
 const script3 = path.join(__dirname, '3.js');
 const distDir = path.join(__dirname, 'demo/dist');
 
-describe('revert command', () => {
+describe('restore command', () => {
   // 60s timeout
   jest.setTimeout(60000);
 
@@ -26,7 +26,7 @@ describe('revert command', () => {
     }
   });
 
-  test('revert by no zip files', done => {
+  test('restore by no zip files', done => {
     const child = spawn('node', [path.join(__dirname, 'not-exist.js')]);
 
     let stderrCount = 0;
@@ -49,7 +49,7 @@ describe('revert command', () => {
     });
   });
 
-  test('revert index:1', done => {
+  test('restore index:1', done => {
     const child = spawn('node', [script1]);
 
     // Last message
@@ -64,7 +64,7 @@ describe('revert command', () => {
       // Has stdout
       expect(stdoutMessage).not.toBeUndefined();
       // Has stdout
-      expect(stdoutMessage).toContain("Revert 'dist' directory to last");
+      expect(stdoutMessage).toContain("Restore 'dist' directory to last");
       // 2 files
       expect(filesCount(distDir)).toBe(2);
       // Has 1.js
@@ -75,7 +75,7 @@ describe('revert command', () => {
     });
   });
 
-  test('revert index:2', done => {
+  test('restore index:2', done => {
     const child = spawn('node', [script2]);
 
     // Last message
@@ -90,7 +90,7 @@ describe('revert command', () => {
       // Has stdout
       expect(stdoutMessage).not.toBeUndefined();
       // Has stdout
-      expect(stdoutMessage).toContain("Revert 'dist' directory to last");
+      expect(stdoutMessage).toContain("Restore 'dist' directory to last");
       // 2 files
       expect(filesCount(distDir)).toBe(2);
       // Has 1.js
@@ -101,7 +101,7 @@ describe('revert command', () => {
     });
   });
 
-  test('revert index:3', done => {
+  test('restore index:3', done => {
     const child = spawn('node', [script3]);
 
     let stderrCount = 0;
