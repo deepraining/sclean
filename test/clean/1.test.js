@@ -10,7 +10,7 @@ const demoDir = path.join(__dirname, 'demo');
 const distDir = path.join(__dirname, 'demo/dist');
 const bakDir = path.join(__dirname, 'demo/bak');
 
-describe('clean command', () => {
+describe('clean command [demo]', () => {
   // 60s timeout
   jest.setTimeout(60000);
 
