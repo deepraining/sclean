@@ -9,7 +9,7 @@ if (fs.existsSync(pathInfo.configFilePath)) {
   logger.warn(`
   Current directory has already been initialized.
   `);
-  process.exit(0);
+  process.exit(1);
 }
 
 fse.copyFileSync(path.join(pathInfo.scleanRoot, 'project_files/sclean.config.js'), pathInfo.configFilePath);
