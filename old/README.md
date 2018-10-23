@@ -69,3 +69,39 @@ This command will restore target directory to last nth archive state from `zip` 
 
 * `since`: `v0.0.1`
 * Can take `-i, --index` argument, which means last nth state, and default is `1`.
+
+## 2. Project config.
+
+Defined in `sclean.config.js`.
+
+### target
+
+- `desc`: Target directory to handle.
+- `type`: `string`
+- `default`: `dist`
+- `since`: `v0.0.1`
+
+### htmlExtension
+
+- `desc`: Html extension, such as `html`, `jsp`, `php`.
+- `type`: `string`
+- `default`: `html`
+- `since`: `v0.0.1`
+
+### hashLength
+
+- `desc`: Hash code length.
+- `type`: `int`
+- `default`: `32`
+- `since`: `v0.0.1`
+
+### testChunkFile
+
+- `desc`: Test a file is a chunk js file or not. See [Dynamic Imports](https://webpack.js.org/guides/code-splitting/#dynamic-imports).
+- `type`: `RegExp`
+- `default`: `/^[0-9]{1,4}\./`
+- `since`: `v0.0.1`
+
+## 3. Examples
+
+See [sclean examples](./examples).
