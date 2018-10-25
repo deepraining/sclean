@@ -1,2 +1,2 @@
 process.chdir(__dirname);
-require('../exec')('sclean');
+require('../exec')('sclean clean');

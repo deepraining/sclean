@@ -1,2 +1,2 @@
 process.chdir(__dirname);
-require('../exec')('sclean build');
+require('../exec')('sclean clean build');

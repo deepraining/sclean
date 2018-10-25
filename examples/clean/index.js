@@ -6,4 +6,4 @@ removeSync(`${__dirname}/target`);
 copySync(`${__dirname}/bak`, `${__dirname}/target`);
 
 process.chdir(__dirname);
-require('../exec')('sclean target');
+require('../exec')('sclean clean target');
