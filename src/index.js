@@ -84,6 +84,7 @@ commander
       const result = hashCodes({ files, ext, hash });
 
       if (result.error) {
+        spinner.stop();
         log(`
   ${result.message}    
         `);
@@ -113,6 +114,19 @@ commander
 
           del(delFiles).then(() => {
             spinner.stop();
+
+            log('');
+            if (delFiles.length < 11)
+              delFiles.forEach(file => {
+                log(`  ${file}`);
+              });
+            else {
+              [...delFiles.slice(0, 5), '...', ...delFiles.slice(-5)].forEach(
+                file => {
+                  log(`  ${file}`);
+                }
+              );
+            }
 
             log(`
   cleaned ${delFiles.length} files
