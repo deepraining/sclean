@@ -37,7 +37,7 @@
     "lint-staged": "lint-staged",
     "build": "rollup -c",
     "test": "jest test/**/*.test.js",
-    "test:clean": "jest test/clean/clean.test.js"
+    "test:base": "jest test/base.test.js"
   },
   "dependencies": {
     "chalk": "^2.4.1",
