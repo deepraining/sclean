@@ -33,8 +33,6 @@ sclean restore <directory> [--index index]
 ### `clean`: clean obsolete hash-code files
 
 ```
-sclean <directory> [--ext ext] [--hash hash]
-
 sclean clean <directory> [--ext ext] [--hash hash]
 ```
 
