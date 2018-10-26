@@ -25,6 +25,10 @@
   },
   "homepage": "https://github.com/senntyou/sclean",
   "readmeFilename": "README.md",
+  "files": [
+    "bin",
+    "lib"
+  ],
   "scripts": {
     "precommit": "npm run lint-staged",
     "prettier": "prettier --write ./**/*.{js,json,md}",
@@ -32,7 +36,8 @@
     "eslint:fix": "eslint . --fix",
     "lint-staged": "lint-staged",
     "build": "rollup -c",
-    "test": "jest test/**/*.test.js"
+    "test": "jest test/**/*.test.js",
+    "test:restore": "jest test/restore/restore.test.js"
   },
   "dependencies": {
     "chalk": "^2.4.1",
