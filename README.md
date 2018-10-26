@@ -2,7 +2,7 @@
 
 A tool to clean obsolete hash-coded files, which created by building tools, like webpack, gulp.
 
-## Quick start
+## quick start
 
 Install sclean:
 
@@ -10,7 +10,7 @@ Install sclean:
 npm install sclean -g
 ```
 
-## Command line.
+## command line
 
 ```
 sclean <command> [args]
