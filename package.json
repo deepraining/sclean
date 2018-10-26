@@ -1,9 +1,9 @@
 {
   "name": "sclean",
-  "version": "0.0.1",
-  "main": "index.js",
+  "version": "0.1.0",
+  "main": "lib/index.js",
   "bin": "bin/sclean.js",
-  "description": "A tool to clean obsolete files with hash-code file names, created by building tools, such as webpack, gulp, etc(for server side).",
+  "description": "A tool to clean obsolete hash-coded files, which created by building tools, like webpack, gulp.",
   "repository": {
     "type": "git",
     "url": "https://github.com/senntyou/sclean"
@@ -25,49 +25,59 @@
   },
   "homepage": "https://github.com/senntyou/sclean",
   "readmeFilename": "README.md",
+  "files": [
+    "bin",
+    "lib"
+  ],
   "scripts": {
     "precommit": "npm run lint-staged",
     "prettier": "prettier --write ./**/*.{js,json,md}",
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix",
     "lint-staged": "lint-staged",
-    "test": "jest",
-    "test:clean": "jest test/clean",
-    "cover": "npm run cover:init && npm run cover:all && npm run cover:report",
-    "cover:init": "rimraf coverage",
-    "cover:all": "jest --coverage",
-    "cover:report": "istanbul report"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build",
+    "pretest": "npm run build",
+    "test": "jest test",
+    "test:base": "jest test/base.test.js"
   },
   "dependencies": {
     "chalk": "^2.4.1",
+    "commander": "^2.19.0",
     "decompress": "^4.2.0",
-    "fs-extra": "^6.0.1",
-    "glob": "^7.1.2",
+    "del": "^3.0.0",
+    "glob": "^7.1.3",
     "gulp": "^4.0.0",
-    "gulp-cli": "git://github.com/senntyou/gulp-cli.git#6f9e0ef",
-    "gulp-zip": "^4.1.0",
-    "lodash": "^4.17.10",
-    "minimist": "^1.2.0",
-    "moment": "^2.22.2",
-    "rd": "^1.1.2",
-    "yargs": "^8.0.2"
+    "gulp-zip": "^4.2.0",
+    "inquirer": "^6.2.0",
+    "ora": "^3.0.0",
+    "recursive-readdir": "^2.2.2"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-jest": "^21.17.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-prettier": "^2.6.2",
-    "husky": "^0.14.3",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.23.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prettier": "^2.7.0",
+    "fs-extra": "^7.0.0",
+    "husky": "^1.0.1",
     "istanbul": "^0.4.5",
-    "jest": "^23.4.0",
-    "lint-staged": "^7.2.0",
-    "prettier": "^1.13.7",
-    "rimraf": "^2.6.2"
+    "jest": "^23.6.0",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3",
+    "rd": "^2.0.1",
+    "rollup": "^0.66.2",
+    "rollup-plugin-json": "^3.1.0"
   },
   "lint-staged": {
     "**/*.js": [
       "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.{md,json}": [
       "prettier --write",
       "git add"
     ]

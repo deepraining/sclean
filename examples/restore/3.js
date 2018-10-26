@@ -1,4 +1,2 @@
-
-require('../../util/change_cwd')(__dirname + '/demo');
-
-require('../../util/exec')('sclean restore --index 3');
+process.chdir(__dirname);
+require('../exec')('sclean restore target --index 3');

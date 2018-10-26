@@ -1,7 +1,9 @@
+const fse = require('fs-extra'); // eslint-disable-line
 
-const fse = require('fs-extra');
-fse.copySync(__dirname + '/demo/bak', __dirname + '/demo/target');
+const { copySync, removeSync } = fse;
 
-require('../../util/change_cwd')(__dirname + '/demo');
+removeSync(`${__dirname}/target`);
+copySync(`${__dirname}/bak`, `${__dirname}/target`);
 
-require('../../util/exec')('sclean');
+process.chdir(__dirname);
+require('../exec')('sclean clean target');

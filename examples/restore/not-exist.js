@@ -1,4 +1,2 @@
-
-require('../../util/change_cwd')(__dirname);
-
-require('../../util/exec')('sclean restore');
+process.chdir(__dirname);
+require('../exec')('sclean restore build');

@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('../');
+require('../lib'); // eslint-disable-line import/no-unresolved

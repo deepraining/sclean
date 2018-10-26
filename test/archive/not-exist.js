@@ -1,3 +1,2 @@
-require('../../util/change_cwd')(__dirname);
-
-require('../../util/exec')('sclean archive');
+process.chdir(__dirname);
+require('../exec')('sclean archive build');
