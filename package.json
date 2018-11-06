@@ -1,6 +1,6 @@
 {
   "name": "sclean",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "lib/index.js",
   "bin": "bin/sclean.js",
   "description": "A tool to clean obsolete hash-coded files, which created by building tools, like webpack, gulp.",

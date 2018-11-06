@@ -68,7 +68,7 @@ commander
 commander
   .command('clean <directory>')
   .description('clean obsolete hash-code files')
-  .option('-e, --ext [ext]', 'html extension', 'html')
+  .option('-e, --ext [ext]', 'extra html extensions')
   .option('-H, --hash [hash]', 'hash length', 32)
   .action((dir, { ext, hash }) => {
     if (!existsSync(dir)) return;

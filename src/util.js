@@ -41,12 +41,17 @@ const makeRegExp = hash =>
 export const hashCodes = ({ files, ext, hash }) => {
   const htmlCodes = [];
   const jsCodes = [];
+  const extensions = ext ? ext.split(',') : [];
+
+  extensions.unshift('html');
 
   let htmlCount = 0;
 
   // hash codes in html content
   files.forEach(file => {
-    if (file.slice(0 - ext.length) !== ext) return;
+    const fileExt = file.slice(file.lastIndexOf('.') + 1);
+
+    if (extensions.indexOf(fileExt) < 0) return;
 
     const content = readFileSync(file);
     const regExp = makeRegExp(hash);
@@ -63,7 +68,7 @@ export const hashCodes = ({ files, ext, hash }) => {
   if (!htmlCount)
     return {
       error: !0,
-      message: `no ${ext} files found`,
+      message: `no ${extensions.join('|')} files found`,
     };
 
   // hash codes in js content
