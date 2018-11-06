@@ -36,8 +36,8 @@ sclean restore <directory> [--index index]
 sclean clean <directory> [--ext ext] [--hash hash]
 ```
 
-- `ext/e`: `string`, default `html`, html extension
-- `hash/H`: `int`, default `32`, hash length
+- `ext/e`: `type: string` extra html extensions(split by `,`, like `--ext jsp,php`)
+- `hash/H`: `type: int` `default: 32` hash length
 
 ## philosophy of cleaning obsolete files
 
