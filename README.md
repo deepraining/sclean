@@ -1,50 +1,52 @@
 # sclean
 
-A tool to clean obsolete hash-coded files, which created by building tools, like webpack, gulp.
+[English documentation](./README.en.md)
 
-## quick start
+一个用于清除由 webpack, gulp 等构建工具生成的过期的 hash 编码的文件.
 
-Install sclean:
+## 快速开始
+
+安装 sclean:
 
 ```
 npm install sclean -g
 ```
 
-## command line
+## 命令行
 
 ```
 sclean <command> [args]
 ```
 
-### `archive`: archive target directory to a zip file
+### `archive`: 归档目标目录到一个 zip 文件
 
 ```
 sclean archive <directory>
 ```
 
-### `restore`: restore target directory to last nth archive state
+### `restore`: 恢复目标目录到最近第 n 次的归档状态
 
 ```
 sclean restore <directory> [--index index]
 ```
 
-- `index/i`: `int`, default `1`, last nth state to restore
+- `index/i`: `int`, 默认是 `1`, 恢复到最近第 n 次状态
 
-### `clean`: clean obsolete hash-code files
+### `clean`: 清除过期的 hash 编码的文件
 
 ```
 sclean clean <directory> [--ext ext] [--hash hash]
 ```
 
-- `ext/e`: `type: string` extra html extensions(split by `,`, like `--ext jsp,php`)
-- `hash/H`: `type: int` `default: 32` hash length
+- `ext/e`: `type: string` 其他的 html 扩展名(用 `,` 分隔, 如 `--ext jsp,php`)
+- `hash/H`: `type: int` `default: 32` hash 长度
 
-## philosophy of cleaning obsolete files
+## 清除过期的 hash 编码的文件的逻辑
 
-1. find all hash codes from html files (hashes1)
-2. find all hash codes from js files whose file name matches hashes1 (hashes2, async js bundles)
-3. delete js and css files whose file name neither matches hashes1 nor hashes2
+1. 从 html 文件中找出所有的 hash codes (hashes1)
+2. 从匹配 hashes1 的 js 文件中 找出所有的 hash codes (hashes2, 异步 js bundles)
+3. 删除文件名既不匹配 hashes1、也不匹配 hashes2 的 js、css 文件
 
-## addition
+## 其他
 
-- sclean only clean js and css files, not other static files
+- sclean 只能清理 js、css 文件, 不能清理其他静态文件
